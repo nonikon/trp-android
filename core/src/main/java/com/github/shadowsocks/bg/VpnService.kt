@@ -158,7 +158,7 @@ class VpnService : BaseVpnService(), BaseService.Interface {
                 .setSession(profile.formattedName)
                 .setMtu(VPN_MTU)
                 .addAddress(PRIVATE_VLAN4_CLIENT, 30)
-                .addDnsServer(PRIVATE_VLAN4_ROUTER)
+                .addDnsServer(profile.remoteDns)
 
         if (profile.ipv6) builder.addAddress(PRIVATE_VLAN6_CLIENT, 126)
 
@@ -206,7 +206,7 @@ class VpnService : BaseVpnService(), BaseService.Interface {
                 "--socks-server-addr", "${DataStore.listenAddress}:${DataStore.portProxy}",
                 "--tunmtu", VPN_MTU.toString(),
                 "--sock-path", "sock_path",
-                "--dnsgw", "127.0.0.1:${DataStore.portLocalDns}",
+//                "--dnsgw", "127.0.0.1:${DataStore.portLocalDns}",
                 "--loglevel", "warning")
         if (profile.ipv6) {
             cmd += "--netif-ip6addr"

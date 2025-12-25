@@ -133,6 +133,7 @@ class ProfileConfigFragment : PreferenceFragmentCompat(),
         addPreferencesFromResource(R.xml.pref_profile)
         findPreference<EditTextPreference>(Key.remotePort)!!.setOnBindEditTextListener(EditTextPreferenceModifiers.Port)
         findPreference<EditTextPreference>(Key.password)!!.summaryProvider = PasswordSummaryProvider
+        findPreference<EditTextPreference>(Key.devicePassword)!!.summaryProvider = PasswordSummaryProvider
         val serviceMode = DataStore.serviceMode
         findPreference<Preference>(Key.ipv6)!!.isEnabled = serviceMode == Key.modeVpn
         isProxyApps = findPreference(Key.proxyApps)!!
@@ -154,6 +155,9 @@ class ProfileConfigFragment : PreferenceFragmentCompat(),
         udpFallback = findPreference(Key.udpFallback)!!
         DataStore.privateStore.registerChangeListener(this)
 
+        udpFallback.isEnabled = false
+        findPreference<Preference>(Key.method)!!.isEnabled = false
+
         val profile = ProfileManager.getProfile(profileId) ?: Profile()
         if (profile.subscription == Profile.SubscriptionStatus.Active) {
             findPreference<Preference>(Key.name)!!.isEnabled = false
@@ -161,6 +165,8 @@ class ProfileConfigFragment : PreferenceFragmentCompat(),
             findPreference<Preference>(Key.password)!!.isEnabled = false
             findPreference<Preference>(Key.method)!!.isEnabled = false
             findPreference<Preference>(Key.remotePort)!!.isEnabled = false
+            findPreference<Preference>(Key.deviceId)!!.isEnabled = false
+            findPreference<Preference>(Key.devicePassword)!!.isEnabled = false
             plugin.isEnabled = false
             pluginConfigure.isEnabled = false
             udpFallback.isEnabled = false

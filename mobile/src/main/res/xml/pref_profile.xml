@@ -26,6 +26,16 @@
                 app:key="sitekey"
                 app:icon="@drawable/ic_settings_password"
                 app:title="@string/sitekey"/>
+        <EditTextPreference
+            app:key="deviceId"
+            app:icon="@drawable/ic_navigation_apps"
+            app:title="@string/device_id"
+            app:useSimpleSummaryProvider="true"/>
+        <EditTextPreference
+            app:dialogLayout="@layout/preference_dialog_password"
+            app:key="devicePassword"
+            app:icon="@drawable/ic_settings_password"
+            app:title="@string/device_password"/>
         <com.takisoft.preferencex.SimpleMenuPreference
                 app:key="encMethod"
                 app:icon="@drawable/ic_notification_enhanced_encryption"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="app_name">Shadowsocks</string>
+  <string name="app_name">Trp</string>
   <string name="quick_toggle">Toggle</string>
   <string name="send_email">Send email</string>
 
@@ -32,6 +32,8 @@
   <string name="remote_port">Remote Port</string>
   <string name="sitekey">Password</string>
   <string name="enc_method">Encrypt Method</string>
+  <string name="device_id">Device ID</string>
+  <string name="device_password">Device Password</string>
 
   <!-- feature category -->
   <string name="ipv6">IPv6 Route</string>

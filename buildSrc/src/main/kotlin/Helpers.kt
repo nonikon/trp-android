@@ -25,7 +25,7 @@ fun Project.setupCommon() {
     android.apply {
         compileSdkVersion(35)
         defaultConfig {
-            minSdk = 23
+            minSdk = 24 // for libuv
             targetSdk = 35
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }

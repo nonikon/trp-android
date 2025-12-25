@@ -117,16 +117,16 @@ class ProxyInstance(val profile: Profile, private val route: String = profile.ro
         // build the command line
         val cmd = arrayListOf(
                 File((service as Context).applicationInfo.nativeLibraryDir, Executable.SS_LOCAL).absolutePath,
-                "--stat-path", stat.absolutePath,
-                "-c", configFile.absolutePath,
+                "-b:" + DataStore.portProxy,
+                "-x" + profile.host + ":" + profile.remotePort,
+                "-k" + profile.password,
+                "-u1"
         )
 
-        if (service.isVpnService) cmd += "--vpn"
+        if (service.isVpnService) cmd += "-p"
 
-        if (route != Acl.ALL) {
-            cmd += "--acl"
-            cmd += Acl.getFile(route).absolutePath
-        }
+        if (profile.deviceId.isNotEmpty()) cmd += "-d" + profile.deviceId
+        if (profile.devicePassword.isNotEmpty()) cmd += "-K" + profile.devicePassword
 
         service.data.processes!!.start(cmd)
     }

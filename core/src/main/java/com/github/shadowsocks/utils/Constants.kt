@@ -57,6 +57,8 @@ object Key {
     const val method = "encMethod"
     const val remotePort = "remotePortNum"
     const val remoteDns = "remoteDns"
+    const val deviceId = "deviceId"
+    const val devicePassword = "devicePassword"
 
     const val plugin = "plugin"
     const val pluginConfigure = "plugin.configure"

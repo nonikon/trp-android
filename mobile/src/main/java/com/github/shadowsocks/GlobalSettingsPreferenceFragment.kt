@@ -75,6 +75,7 @@ class GlobalSettingsPreferenceFragment : PreferenceFragmentCompat() {
         listener((activity as MainActivity).state)
         MainActivity.stateListener = listener
         serviceMode.onPreferenceChangeListener = onServiceModeChange
+        portLocalDns.isEnabled = false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

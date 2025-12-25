@@ -54,13 +54,15 @@ data class Profile(
         // user configurable fields
         var name: String? = "",
 
-        var host: String = "example.shadowsocks.org",
-        var remotePort: Int = 8388,
-        var password: String = "u1rRWTssNv0p",
+        var host: String = "example.trp.server",
+        var remotePort: Int = 9901,
+        var password: String = "Abcd123456",
         var method: String = "aes-256-cfb",
+        var deviceId: String = "",
+        var devicePassword: String = "",
 
         var route: String = "all",
-        var remoteDns: String = "dns.google",
+        var remoteDns: String = "8.8.8.8",
         var proxyApps: Boolean = false,
         var bypass: Boolean = false,
         var udpdns: Boolean = false,
@@ -347,6 +349,8 @@ data class Profile(
         DataStore.privateStore.putString(Key.route, route)
         DataStore.privateStore.putString(Key.remoteDns, remoteDns)
         DataStore.privateStore.putString(Key.method, method)
+        DataStore.privateStore.putString(Key.deviceId, deviceId)
+        DataStore.privateStore.putString(Key.devicePassword, devicePassword)
         DataStore.proxyApps = proxyApps
         DataStore.bypass = bypass
         DataStore.privateStore.putBoolean(Key.udpdns, udpdns)
@@ -368,6 +372,8 @@ data class Profile(
         remotePort = parsePort(DataStore.privateStore.getString(Key.remotePort), 8388, 1)
         password = DataStore.privateStore.getString(Key.password) ?: ""
         method = DataStore.privateStore.getString(Key.method) ?: ""
+        deviceId = DataStore.privateStore.getString(Key.deviceId) ?: ""
+        devicePassword = DataStore.privateStore.getString(Key.devicePassword) ?: ""
         route = DataStore.privateStore.getString(Key.route) ?: ""
         remoteDns = DataStore.privateStore.getString(Key.remoteDns) ?: ""
         proxyApps = DataStore.proxyApps
