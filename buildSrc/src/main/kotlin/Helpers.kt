@@ -87,11 +87,24 @@ fun Project.setupApp() {
             "zh-rCN",
             "zh-rTW",
         ))
+        signingConfigs {
+            System.getenv("KEYSTORE_PATH")?.let { keystorePath ->
+                create("release") {
+                    storeFile = file(keystorePath)
+                    storePassword = System.getenv("KEYSTORE_PASSWORD")
+                    keyAlias = System.getenv("KEY_ALIAS")
+                    keyPassword = System.getenv("KEY_PASSWORD")
+                }
+            }
+        }
         buildTypes {
             getByName("debug") {
                 isPseudoLocalesEnabled = true
             }
             getByName("release") {
+                signingConfigs.findByName("release")?.let { config ->
+                    signingConfig = config
+                }
                 isShrinkResources = true
                 isMinifyEnabled = true
                 proguardFile(getDefaultProguardFile("proguard-android.txt"))

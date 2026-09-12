@@ -1,0 +1,34 @@
+name: package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Setup JDK
+      uses: actions/setup-java@v6
+      with:
+        distribution: temurin
+        java-version: 21
+        cache: gradle
+
+    - name: Generate keystore
+      run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > mobile/release.jks
+
+    - name: Build APK with Gradle
+      run: ./gradlew :mobile:assembleRelease
+      env:
+        KEYSTORE_PATH: release.jks
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        KEY_ALIAS: key0
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v7
+      with:
+        name: app-release
+        path: mobile/build/outputs/apk/release/*.apk
